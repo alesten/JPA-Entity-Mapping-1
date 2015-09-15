@@ -3,14 +3,19 @@ package entity;
 import enums.CustomerType;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKeyColumn;
 
 @Entity
 public class Customer implements Serializable {
@@ -24,6 +29,10 @@ public class Customer implements Serializable {
     private CustomerType customerType;
     @ElementCollection()
     private List<String> hobbies = new ArrayList();
+    @ElementCollection(fetch = FetchType.LAZY) 
+    @MapKeyColumn(name = "PHONE") 
+    @Column(name="Description")
+    private Map<String,String> phones = new HashMap();
 
     public Customer() {
     }
@@ -68,17 +77,17 @@ public class Customer implements Serializable {
     public List<String> getHobbies() {
         return hobbies;
     }
-
-//    public String getHobbies() {
-//        String s = "";
-//        for (String hobby : hobbies) {
-//            s += hobby + ",";
-//        }
-//        return s.substring(0, s.length() -1);
-//    }
     
     public void addHobbby(String s){
         hobbies.add(s);
+    }
+    
+    public void addPhone(String phoneNo, String description){
+        phones.put(phoneNo, description);
+    }
+    
+    public String getPhoneDescription(String phoneNo){
+        return phones.get(phoneNo);
     }
     
     @Override

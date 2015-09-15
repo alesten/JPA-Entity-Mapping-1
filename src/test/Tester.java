@@ -14,6 +14,8 @@ public class Tester {
         c1.addHobbby("Håndbold");
         c1.addHobbby("Fodbold");
         c1.addHobbby("PC");
+        c1.addPhone("12345678", "Dette er min telefon");
+        c1.addPhone("87654321", "Ikke min telefon");
         
         em.getTransaction().begin();
         
@@ -32,6 +34,9 @@ public class Tester {
     5.1. Der kommer Customertype ind i tablets og enumens værdig bliver sat ind.
     5.2. Nu bliver enumens navn sat ind i stedet.
 
-    6.1. Uden @ElementCollection() indsætter den ulæslig bytedata.
-    6.2. Med @ElementCollection() indsætter den en ny tabel som kæder hobby med customer
+    6.1. Uden annotations indsætter den ulæslig blob.
+    6.2. Med annotations indsætter den en ny tabel som kæder hobby med customer
+
+    7.1. Uden annotations indsætter den ulæslig blob
+    7.2. Med annotations indsætter den en ny tabel som kæder phone med customer
 */
